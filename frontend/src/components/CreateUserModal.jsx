@@ -3,9 +3,7 @@ import { TiUserAddOutline } from "react-icons/ti";
 
 const CreateUserModal = () => {
 
-  const closeModal = (e) => {
-    e.modal('hide');
-  }
+  
   return (
     <div>
       <button className=' bg-gray-400 rounded-full h-10 w-10 m-1 flex items-center justify-center'

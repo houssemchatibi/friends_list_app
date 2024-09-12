@@ -8,6 +8,7 @@ import UserGrid from "./components/UserGrid"
 function App() {
 
 const [users,setUsers] = useState();
+console.log(users)
   return (
     <div>
       <Navbar />

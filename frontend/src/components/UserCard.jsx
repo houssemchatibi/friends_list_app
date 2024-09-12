@@ -4,7 +4,7 @@ import { LuPencilLine } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 
-const UserCard = () => {
+const UserCard = ({user}) => {
     const { theme } = useTheme();
 
     const cardBg = theme === "dark" ? "bg-gray-700" : "";
@@ -17,12 +17,12 @@ const UserCard = () => {
                         <div className='flex justify-center gap-4'>
                             <div className="avatar">
                                 <div className="w-12 rounded-full">
-                                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                    <img src={user.imgUrl} />
                                 </div>
                             </div>
                             <div className=' flex flex-col justify-center '>
-                                <p className={`card-title text-base font-bold ${textCol}`}>Card title!</p>
-                                <p className={` text-sm ${textCol}`}>dev role</p>
+                                <p className={`card-title text-base font-bold ${textCol}`}>{user.name}</p>
+                                <p className={` text-sm ${textCol}`}>{user.role}</p>
                             </div>
                         </div>
                         <div className='flex gap-2'>
@@ -34,7 +34,7 @@ const UserCard = () => {
                             </button>
                         </div>
                     </div>
-                    <p className={`mt-5 text-sm ${textCol}`}>If a dog chews shoes whose shoes does he choose?</p>
+                    <p className={`mt-5 text-sm ${textCol}`}>{user.description}</p>
 
                 </div>
             </div>
