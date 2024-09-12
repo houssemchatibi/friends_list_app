@@ -1,11 +1,13 @@
 
+import { useState } from "react"
 import Navbar from "./components/Navbar"
+import UserGrid from "./components/UserGrid"
 
 
 
 function App() {
 
-
+const [users,setUsers] = useState();
   return (
     <div>
       <Navbar />
@@ -13,7 +15,7 @@ function App() {
       bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
         My friends
       </p>
-
+      <UserGrid users={users} setUsers={setUsers} />
     </div>
   )
 }
