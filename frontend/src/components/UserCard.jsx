@@ -2,6 +2,7 @@ import React from 'react'
 import { useTheme } from '../hook/ThemeContext';
 import { LuPencilLine } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import EditModal from './EditModal';
 
 
 const UserCard = ({user}) => {
@@ -26,9 +27,7 @@ const UserCard = ({user}) => {
                             </div>
                         </div>
                         <div className='flex gap-2'>
-                            <button className='w-6 h-6 rounded hover:bg-gray-400 transition-colors flex items-center justify-center'>
-                                <LuPencilLine className='w-4 h-4' />
-                            </button>
+                           <EditModal/>
                             <button className='w-6 h-6 rounded hover:bg-gray-400 transition-colors flex items-center justify-center'>
                                 <RiDeleteBin6Line className='w-4 h-4 text-red-300 ' />
                             </button>
