@@ -3,13 +3,32 @@ import { useTheme } from '../hook/ThemeContext';
 import { LuPencilLine } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import EditModal from './EditModal';
+import { BASE_URL } from '../App';
+import toast from 'react-hot-toast';
 
 
-const UserCard = ({user}) => {
+const UserCard = ({user , setUser}) => {
     const { theme } = useTheme();
 
     const cardBg = theme === "dark" ? "bg-gray-700" : "";
     const textCol = theme === "dark" ? "text-white" : "";
+
+    const handleDeleteUser =async(e)=>{
+     try {
+        const res = await fetch (BASE_URL + "/friends/"+user.id ,
+           { method: "DELETE",
+        });
+        const data = await res.json();
+        if (!res.ok) {
+            throw new Error(data.error);
+        }
+
+        setUser = ((prevUsers) => (prevUsers.filter((u)=>u.id != user.id)));
+        toast.success("Friend deleted successfully.")
+     } catch (error) {
+        toast.error(error.message)
+     }
+    }
     return (
         <div>
             <div className={`card bg-base-100 w-full m-3 ${cardBg} shadow-xl`}>
@@ -27,8 +46,9 @@ const UserCard = ({user}) => {
                             </div>
                         </div>
                         <div className='flex gap-2'>
-                           <EditModal/>
-                            <button className='w-6 h-6 rounded hover:bg-gray-400 transition-colors flex items-center justify-center'>
+                           <EditModal user ={user} setUser ={setUser}/>
+                            <button className='w-6 h-6 rounded hover:bg-gray-400 transition-colors flex items-center justify-center'
+                            onClick={handleDeleteUser}>
                                 <RiDeleteBin6Line className='w-4 h-4 text-red-300 ' />
                             </button>
                         </div>
