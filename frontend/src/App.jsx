@@ -5,11 +5,11 @@ import UserGrid from "./components/UserGrid"
 import { Toaster } from "react-hot-toast";
 
 
-
+export const BASE_URL = "http://127.0.0.1:5000/api" 
 function App() {
-
+ 
 const [users,setUsers] = useState();
-console.log(users)
+
   return (
     <div>
       <Toaster />

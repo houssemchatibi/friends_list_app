@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { TiUserAddOutline } from "react-icons/ti";
 import toast from 'react-hot-toast';
+import { BASE_URL } from '../App';
 
 const CreateUserModal = ({setUsers}) => {
 
@@ -16,7 +17,7 @@ const handleCreateUser =async(e) =>{
   e.preventDefault();
   setLoading(true);
   try {
-    const res = await fetch ("http://127.0.0.1:5000/api/friends",
+    const res = await fetch (BASE_URL + "/friends",
       {
         method: "POST",
 				headers: {

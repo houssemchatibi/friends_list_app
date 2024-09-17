@@ -7,13 +7,15 @@ import { BASE_URL } from '../App';
 import toast from 'react-hot-toast';
 
 
-const UserCard = ({user , setUser}) => {
+const UserCard = ({user , setUsers}) => {
     const { theme } = useTheme();
 
     const cardBg = theme === "dark" ? "bg-gray-700" : "";
     const textCol = theme === "dark" ? "text-white" : "";
 
-    const handleDeleteUser =async(e)=>{
+    
+    const handleDeleteUser =async()=>{
+        
      try {
         const res = await fetch (BASE_URL + "/friends/"+user.id ,
            { method: "DELETE",
@@ -23,7 +25,7 @@ const UserCard = ({user , setUser}) => {
             throw new Error(data.error);
         }
 
-        setUser = ((prevUsers) => (prevUsers.filter((u)=>u.id != user.id)));
+        setUsers((prevUsers) => (prevUsers.filter((u)=>u.id != user.id)));
         toast.success("Friend deleted successfully.")
      } catch (error) {
         toast.error(error.message)
@@ -46,7 +48,7 @@ const UserCard = ({user , setUser}) => {
                             </div>
                         </div>
                         <div className='flex gap-2'>
-                           <EditModal user ={user} setUser ={setUser}/>
+                           <EditModal user ={user} setUsers ={setUsers}/>
                             <button className='w-6 h-6 rounded hover:bg-gray-400 transition-colors flex items-center justify-center'
                             onClick={handleDeleteUser}>
                                 <RiDeleteBin6Line className='w-4 h-4 text-red-300 ' />

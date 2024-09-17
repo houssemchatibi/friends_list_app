@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react'
 
 import UserCard from './UserCard';
+import { BASE_URL } from '../App';
 
 const UserGrid = ({ users, setUsers }) => {
 
   const [loading, setLoading] = useState(true)
+
+  const [selectedUser, setSelectedUser] = useState(null); // State to track selected user for editing
+
+  const handleEditClick = (user) => {
+    setSelectedUser(user); // Set the clicked user as the selected user
+    console.log("selected user id",user)
+  };
 
   useEffect(() => {
 
 
     const getUsers = async () => {
       try {
-        const res = await fetch("http://127.0.0.1:5000/api/friends");
+        const res = await fetch(BASE_URL + "/friends");
         const data = await res.json();
 
         if (!res.ok) {
@@ -30,7 +38,7 @@ const UserGrid = ({ users, setUsers }) => {
     }
     getUsers();
   }, [setUsers])
-  console.log("users", users);
+  
 
   return (
     <>
@@ -39,9 +47,9 @@ const UserGrid = ({ users, setUsers }) => {
       <p>Loading...</p>
     ) : (
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-[1200px] mx-2 p-10 gap-4 item-center'>
-        
-         { users.map((user) => <UserCard key={user.id} user={user} />)
-        }
+        {users.map((user) => (
+					<UserCard key={user.id} user={user} setUsers={setUsers}  onEditClick={() => handleEditClick(user)}/>
+				))}
       </div>
     )}
      
